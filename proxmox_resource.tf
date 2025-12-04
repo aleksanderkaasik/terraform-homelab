@@ -1,12 +1,13 @@
 resource "proxmox_lxc" "server-testing" {
-  target_node = "proxymity"
-  vmid        = 120
-  hostname    = "test-lxc"
-  ostemplate  = "local:vztmpl/ubuntu-24.04-standard_24.04-1.1_amd64.tar.zst"
-  password    = "secret"
-  unprivileged = true
-
-  start = true
+  target_node     = var.proxmox_node_name
+  vmid            = 120
+  hostname        = "test-lxc"
+  ostemplate      = "local:vztmpl/${var.os_image}"
+  password        = var.proxmox_vm_password
+  tags            = "testing;ubuntu"
+  unprivileged    = true
+  start           = true
+  ssh_public_keys = var.public_ssh_key
 
   network {
     name      = "eth0"
@@ -14,8 +15,6 @@ resource "proxmox_lxc" "server-testing" {
     ip        = "dhcp"
     firewall  = false
   }
-
-  tags = "testing;ubuntu"
 
   features {
     nesting = true
