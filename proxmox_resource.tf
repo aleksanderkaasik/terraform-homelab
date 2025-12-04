@@ -6,7 +6,7 @@ resource "proxmox_lxc" "server-testing" {
   password        = var.proxmox_vm_password
   tags            = "testing;ubuntu"
   unprivileged    = true
-  start           = true
+  start           = false
   ssh_public_keys = var.public_ssh_key
 
   network {
@@ -23,5 +23,13 @@ resource "proxmox_lxc" "server-testing" {
   rootfs {
     storage = "VM-Storage"
     size    = "8G"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      ostemplate,
+      password,
+      ssh_public_keys
+    ]
   }
 }
