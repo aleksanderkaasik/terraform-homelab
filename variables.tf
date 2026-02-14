@@ -29,3 +29,9 @@ variable "os_image" {
 variable "proxmox_node_name" {
   type = string
 }
+
+variable "proxmox_node_tls_insecure" {
+  type = bool
+  description = "By default Proxmox Virtual Environment uses self-signed certificates."
+  default = true
+}
