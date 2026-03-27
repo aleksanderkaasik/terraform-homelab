@@ -37,4 +37,4 @@ for x in range( len( content["resources"] )):
         config = responseConfig.json()["data"]["hostname"]
         ipAdresss = responseInterfaces.json()["data"][1]["ip-addresses"][0]["ip-address"]
         
-        print(f"\"{ipAdresss}\" ip_address=\"{ipAdresss}\" domain_name=\"\"")
+        print(f"\"{ipAdresss}\"")
